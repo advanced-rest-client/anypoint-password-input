@@ -1,0 +1,81 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../iron-test-helpers/test-helpers.js"></script>
+  <script src="../../iron-test-helpers/mock-interactions.js"></script>
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../anypoint-password-input.html">
+</head>
+
+<body>
+  <test-fixture id="basic">
+    <template>
+      <anypoint-password-input></anypoint-password-input>
+    </template>
+  </test-fixture>
+  <test-fixture id="visible">
+    <template>
+      <anypoint-password-input visible></anypoint-password-input>
+    </template>
+  </test-fixture>
+  <test-fixture id="error">
+    <template>
+      <anypoint-password-input auto-validate pattern="[0-9]*" value="foobar" error-message="error"></anypoint-password-input>
+    </template>
+  </test-fixture>
+  <script>
+  /* global fixture, assert */
+  suite('basic', function() {
+    test('Initial visibility state is off', function() {
+      var input = fixture('basic');
+      assert.equal(input.visible, false, 'input.visible equals false');
+    });
+    test('Setting visibility shows the password', function() {
+      var input = fixture('basic');
+      input.visible = true;
+      assert.equal(input.inputElement.type, 'text', 'inputElement.type equals text');
+    });
+    test('setting value sets the input value', function() {
+      var input = fixture('basic');
+      input.value = 'foobar';
+      assert.equal(input.inputElement.value, input.value, 'inputElement.value equals input.value');
+    });
+    test('clear the input value', function() {
+      var input = fixture('basic');
+      input.value = 'foobar';
+      assert.equal(input.inputElement.value, input.value, 'inputElement.value equals input.value');
+      input.clear();
+      assert.equal(input.inputElement.value, '', 'inputElement.value equals ""');
+    });
+    test('Default visibility icon is `visibility`', function() {
+      var input = fixture('basic');
+      assert.equal(input.icon, 'anypoint:visibility', 'input.icon equals arc:visibility');
+    });
+    test('Changing visibility icon changes', function() {
+      var input = fixture('basic');
+      input.visible = true;
+      assert.equal(input.icon, 'anypoint:visibility-off', 'input.icon equals arc:visibility-off');
+    });
+    test('Initial visibility state is on for visible attribute.', function() {
+      var input = fixture('visible');
+      assert.equal(input.visible, true, 'input.visible equals true');
+    });
+  });
+  </script>
+</body>
+
+</html>
