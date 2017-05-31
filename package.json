@@ -1,6 +1,6 @@
 {
   "name": "anypoint-password-input",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "All rights reserved to Mulesoft Inc.",
   "description": "Anypoint password input with preview password action",
   "devDependencies": {
